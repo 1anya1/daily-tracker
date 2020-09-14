@@ -14,5 +14,11 @@ router.post('/', (req,res)=>{
         res.json(createdItem)
     })
 })
+//Delete Route 
+router.delete('/:id', (req,res)=>{
+    Items.findByIdAndRemove(req.params.id, (err,deletedItem)=>{
+        res.json(deletedItem)
+    })
+})
 
 module.exports =router;
