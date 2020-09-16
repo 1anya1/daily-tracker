@@ -1,4 +1,4 @@
-import '../css/main.scss'
+
 class App extends React.Component{
 
     state={
