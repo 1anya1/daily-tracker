@@ -21,7 +21,7 @@ class App extends React.Component{
                 {this.state.items.map(item=>{
                     return(
                         <div className='item'> 
-                            <h3>{item.description}</h3>
+                            <h4>{item.description}</h4>
                             <h4>Complete</h4>
                             <h4>X</h4>
                          </div>
