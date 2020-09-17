@@ -1,7 +1,8 @@
 .item {
   display: flex;
   flex-direction: row;
-  background: purple; }
+  background: gray;
+  width: 50%; }
 
 h4 {
   padding-left: 15px; }
