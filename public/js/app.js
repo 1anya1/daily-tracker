@@ -66,7 +66,8 @@ class App extends React.Component{
         .then((jsonedItem)=>{
             fetch('/tracker').then((response)=>response.json()).then((items)=>{
                 this.setState({
-                    items: items
+                    items: items,
+                    
             })
         })
     })
@@ -85,9 +86,9 @@ class App extends React.Component{
                 {this.state.items.map((item, index)=>{
                     return(
                         <div className='item'> 
-                            <h4 className={item.complete ? 'notCompleted' :'completed'}>{item.description}</h4>
+                            <h4 className={item.complete ? 'completed' : 'notCompleted'}>{item.description}</h4>
                             <h4 onClick={() => this.updateItem(item)}>
-                             {item.complete ? 'completed' : 'not completed'}</h4>
+                             {item.complete ? '' : 'completed'}</h4>
                             <h4 onClick={()=> this.deleteItem(item._id, index)}>X</h4>
                          </div>
 
