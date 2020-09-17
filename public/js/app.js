@@ -23,11 +23,42 @@ class App extends React.Component{
             })
         })
     }
+    handleChange=(event)=>{
+        this.setState({ [event.target.id]: event.target.value});
+
+    }
+    handleSubmit=(event)=>{
+        event.preventDefault();
+        fetch('/tracker',{
+            body:JSON.stringify({description: this.state.description}),
+            method: 'POST',
+            headers:
+            {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			}
+        })
+        .then((createdItem)=>{
+            return createdItem.json();
+        })
+        .then((jsonedItem)=>{
+            this.setState({
+                description:'',
+                items: [jsonedItem, ...this.state.items]
+            })
+        })
+        .catch((error)=>console.log(error));
+    }
     render(){
         console.log(this.state)
         return(
             <div>
                 <h1>My To Do </h1>
+                <form onSubmit={this.handleSubmit}>
+                            <label>Description</label>
+                            <input type='text' value={this.state.description} onChange={this.handleChange} id='description' />
+                            < input type='submit' />
+                        </form>
                 {this.state.items.map((item, index)=>{
                     return(
                         <div className='item'> 
