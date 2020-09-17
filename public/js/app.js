@@ -84,10 +84,10 @@ class App extends React.Component{
                         </form>
                 {this.state.items.map((item, index)=>{
                     return(
-                        <div className={item.complete ? 'completed' :'notCompleted'}> 
-                            <h4>{item.description}</h4>
-                            <button onClick={() => this.updateItem(item)}>
-                             {item.complete ? 'completed' : 'not completed'}</button>
+                        <div className='item'> 
+                            <h4 className={item.complete ? 'notCompleted' :'completed'}>{item.description}</h4>
+                            <h4 onClick={() => this.updateItem(item)}>
+                             {item.complete ? 'completed' : 'not completed'}</h4>
                             <h4 onClick={()=> this.deleteItem(item._id, index)}>X</h4>
                          </div>
 
