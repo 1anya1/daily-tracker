@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000
 
 //connection to Mongoose
 const db = mongoose.connection
-mongoose.connect(mongoURI, {userNewUrlParser:true},
+mongoose.connect(mongoURI, { useNewUrlParser: true, userNewUrlParser:true},
     ()=>console.log("MongoDB is up and running:", mongoURI))
 
 //Error in connection to Mongoose

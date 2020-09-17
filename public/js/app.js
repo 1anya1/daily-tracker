@@ -49,6 +49,29 @@ class App extends React.Component{
         })
         .catch((error)=>console.log(error));
     }
+
+    updateItem = (item) => {
+        item.complete = !item.complete;
+        fetch('tracker/'+ item._id, {
+         body: JSON.stringify(item),
+            method: 'PUT',
+            headers:
+            {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+
+         })
+        .then((updateItem)=>updateItem.json())
+        .then((jsonedItem)=>{
+            fetch('/tracker').then((response)=>response.json()).then((items)=>{
+                this.setState({
+                    items: items
+            })
+        })
+    })
+    }
+
     render(){
         console.log(this.state)
         return(
@@ -61,9 +84,10 @@ class App extends React.Component{
                         </form>
                 {this.state.items.map((item, index)=>{
                     return(
-                        <div className='item'> 
+                        <div className={item.complete ? 'completed' :'notCompleted'}> 
                             <h4>{item.description}</h4>
-                            <h4>Complete</h4>
+                            <button onClick={() => this.updateItem(item)}>
+                             {item.complete ? 'completed' : 'not completed'}</button>
                             <h4 onClick={()=> this.deleteItem(item._id, index)}>X</h4>
                          </div>
 

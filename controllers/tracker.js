@@ -21,10 +21,10 @@ router.delete('/:id', (req,res)=>{
     })
 })
 //Update Route
-router.put('/:id', (req,res)=>{
-    Items.findByIdAndUpdate(req.params.id, req.bosy, {new:true}, (err,updatedItem)=>{
-        res.json(updatedItem)
-    })
-})
+router.put('/:id', (req, res)=>{
+    Items.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedItem)=>{
+        res.json(updatedItem);
+    });
+});
 
 module.exports =router;

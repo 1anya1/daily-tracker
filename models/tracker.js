@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
     description: String,
-    completed: Boolean
+    complete: Boolean
 });
 
 const Items = mongoose.model('Items', itemSchema);
