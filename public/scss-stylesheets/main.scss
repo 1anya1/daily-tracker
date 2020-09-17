@@ -1,0 +1,19 @@
+.item{
+    display: flex;
+    flex-direction: row;
+    background:lightgray;
+    width: 50%;
+   
+}
+.item:nth-child(odd){
+    background-color:white;
+}
+.completed{
+ 
+    text-decoration: line-through;
+   
+}
+h4{
+    padding-left: 15px;
+
+}
