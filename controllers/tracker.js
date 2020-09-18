@@ -23,7 +23,7 @@ router.delete('/:id', (req,res)=>{
 //Update Route
 router.put('/:id', (req, res)=>{
     Items.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedItem)=>{
-        res.json(updatedItem);
+        res.json(updatedItemx);
     });
 });
 

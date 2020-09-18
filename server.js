@@ -1,10 +1,12 @@
 const express =require('express');
 const mongoose = require('mongoose');
+var cors = require('cors')
 
 
 //Environment Variables 
 
 const app = express();
+app.use(cors())
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/merncrud'
 const PORT = process.env.PORT || 3000
 
@@ -25,8 +27,10 @@ app.use(express.static('public'))
 
 //ROUTES
 
-const trackerController = require('./controllers/tracker.js');
-app.use('/tracker', trackerController);
+const dayController = require('./controllers/day.js');
+const trackerController=require('./controllers/tracker.js')
+app.use('/day', dayController);
+app.use('/day/tracker', trackerController)
 app.listen(PORT, () => {
     console.log( 'I\'m listening on', PORT)
 })

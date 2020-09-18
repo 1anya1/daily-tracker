@@ -1,104 +1,79 @@
 
 class App extends React.Component{
-
     state={
-        items:[]
+        data:[]
     }
     componentDidMount(){
-        fetch('/tracker')
+        fetch('/day')
         .then(response=>response.json())
         .then(data=>
-            this.setState({
-                items: data
-            })
-            )
-
+        this.setState({
+            data:data
+        })
+        )
     }
-    deleteItem = (id, index)=>{
-        fetch('tracker/' + id,{
-            method: 'DELETE'
+    deletePost=(id,index)=>{
+        fetch('day/'+id,{
+            method:'DELETE'
         }).then((data)=>{
             this.setState({
-                items: [...this.state.items.slice(0, index), ...this.state.items.slice(index+1)]
+                data:[...this.state.data.slice(0, index), ...this.state.data.slice(index+1)]
             })
         })
     }
-    handleChange=(event)=>{
-        this.setState({ [event.target.id]: event.target.value});
-
+    handleChange=()=>{
+        this.setState({ [event.target.id]: event.target.value})
     }
     handleSubmit=(event)=>{
         event.preventDefault();
-        fetch('/tracker',{
-            body:JSON.stringify({description: this.state.description}),
+        fetch('/day',{
+            body: JSON.stringify({note: this.state.note, date: this.state.date}),
             method: 'POST',
             headers:
             {
-				'Accept': 'application/json, text/plain, */*',
-				'Content-Type': 'application/json'
-			}
-        })
-        .then((createdItem)=>{
-            return createdItem.json();
-        })
-        .then((jsonedItem)=>{
-            this.setState({
-                description:'',
-                items: [jsonedItem, ...this.state.items]
-            })
-        })
-        .catch((error)=>console.log(error));
-    }
-
-    updateItem = (item) => {
-        item.complete = !item.complete;
-        fetch('tracker/'+ item._id, {
-         body: JSON.stringify(item),
-            method: 'PUT',
-            headers:
-            {
-                'Accept': 'application/json, text/plain, */*',
+                'Accept': 'application/json, text/plakn, */*',
                 'Content-Type': 'application/json'
             }
-
-         })
-        .then((updateItem)=>updateItem.json())
+        })
+        .then((createdItems)=>{
+            return createdItems.json()
+        }) 
         .then((jsonedItem)=>{
-            fetch('/tracker').then((response)=>response.json()).then((items)=>{
-                this.setState({
-                    items: items,
-                    
+            this.setState({
+                date:'',
+                note:'',
+                data: [jsonedItem, ...this.state.data]
             })
         })
-    })
+        .catch((eroor)=>console.log(error))
     }
-
     render(){
-        console.log(this.state)
+        console.log(this.state.data)
         return(
             <div>
-                <h1>My To Do </h1>
                 <form onSubmit={this.handleSubmit}>
-                            <label>Description</label>
-                            <input type='text' value={this.state.description} onChange={this.handleChange} id='description' />
-                            < input type='submit' />
-                        </form>
-                {this.state.items.map((item, index)=>{
+                    <label>New Day</label>
+                    <input type='text' value={this.state.note} onChange={this.handleChange} id='note' />
+                    <input type='date' value ={this.state.date} onChange={this.handleChange} id='date' />
+                    <input type='submit'></input>
+                </form>
+                {this.state.data.map((el, index)=>{
                     return(
-                        <div className='item'> 
-                            <h4 className={item.complete ? 'completed' : 'notCompleted'}>{item.description}</h4>
-                            <h4 onClick={() => this.updateItem(item)}>
-                             {item.complete ? '' : 'completed'}</h4>
-                            <h4 onClick={()=> this.deleteItem(item._id, index)}>X</h4>
-                         </div>
-
+                        <div>
+                        <div>{el.note}</div>
+                        <div>{el.date}</div>
+                        <button onClick={()=>this.deletePost(el._id, index)}>Delete Entry</button>
+                        <button>List of Things</button>
+                        </div>
 
                     )
-                
+                    
                 })}
-                
+              
             </div>
+
         )
     }
+    
 }
 ReactDOM.render(<App />, document.querySelector('.container'));
