@@ -1,29 +1,33 @@
 {
   "name": "tracker-app",
   "version": "1.0.0",
-  "description": "Track your daily todos with this app.",
+  "description": "",
   "main": "server.js",
-  "scripts": {
-    "build-css": "node-sass public/scss-stylesheets -o public/stylesheets",
-    "watch-css": "npm run build-css && node-sass public/scss-stylesheets -o public/stylesheets --watch --recursive",
-    "start-js": "node server.js",
-    "start": "npm-run-all -p watch-css start-js",
-    "test": "react-scripts test --env=jsdom"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "babel-loader": "^8.1.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "html-loader": "^1.3.0",
+    "html-webpack-plugin": "^4.4.1",
     "mongoose": "^5.10.5",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "babel-plugin-react-require": "^3.1.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/1anya1/daily-tracker.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/1anya1/daily-tracker/issues"
   },

@@ -4,7 +4,7 @@
   background: lightgray;
   width: 50%; }
 
-.item:nth-child(odd) {
+.item:nth-child(even) {
   background-color: white; }
 
 .completed {
